@@ -1,0 +1,27 @@
+Configueration Files
+
+Link to yaml file: https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Fedora-CoreOS/bootstrap.yaml
+
+This yaml file requires tranpiling to an Igntion config file.
+
+Use this online service: https://techoverflow.net/2021/01/13/how-to-use-fcct-transpiler-online-without-installation/
+
+I am using this ignition file which was created some time ago:
+ https://raw.githubusercontent.com/vmendis/Proxmox-Fedora-CoreOS/main/Fedora-CoreOS/bootstrap.yaml
+
+
+I have shortned the github url so I can type it easily on CoreOS
+
+From y.gy
+
+https://y.gy/4Vmj
+
+
+Fedora CoreOS Setup:
+
+Setup a VM on Proxmox for CoreOS
+Boot from the CoreOS LiveCD
+
+
+
+
