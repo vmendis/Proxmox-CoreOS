@@ -1,3 +1,12 @@
+WIP Notes. These will be beautified later on
+
+Assumptions:
+
+a. It is expected user is aware of creating virtual machines (VM) in Proxmox.
+b.
+
+
+
 Configueration Files
 
 Link to yaml file: https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Fedora-CoreOS/bootstrap.yaml
@@ -21,6 +30,8 @@ Fedora CoreOS Setup:
 
 Setup a VM on Proxmox for CoreOS
 Boot from the CoreOS LiveCD
+   -- Add image of console
+
 
 
 
