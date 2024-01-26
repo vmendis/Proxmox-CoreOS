@@ -16,7 +16,8 @@ This yaml file requires tranpiling to an Igntion config file.
 Use this online service: https://techoverflow.net/2021/01/13/how-to-use-fcct-transpiler-online-without-installation/
 
 I am using this ignition file which was created some time ago:
- https://raw.githubusercontent.com/vmendis/Proxmox-Fedora-CoreOS/main/Fedora-CoreOS/bootstrap.yaml
+  https://raw.githubusercontent.com/vmendis/Proxmox-Fedora-CoreOS/main/Fedora-CoreOS/bootstrap.ign
+  
 
 
 I have shortned the github url so I can type it easily on CoreOS
@@ -32,7 +33,10 @@ Setup a VM on Proxmox for CoreOS
 Boot from the CoreOS LiveCD
    -- Add image of console
 
+curl https://y.gy/4Vmj -L -o bootstrap.ign
 
 
+sudo coreos-installer install /dev/sda --ignition-file  bootstrap.ign
 
+sudo init 6
 

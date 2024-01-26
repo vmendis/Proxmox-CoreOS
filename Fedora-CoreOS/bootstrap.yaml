@@ -7,21 +7,7 @@ storage:
       contents:
         inline: |
           core
-    - path: /etc/NetworkManager/system-connections/ens18.nmconnection
-      mode: 0600
-      contents:
-        inline: |
-          [connection]
-          id=ens18
-          type=ethernet
-          interface-name=ens18
-          [ipv4]
-          address1=192.168.1.50/24,192.168.1.1
-          dns=8.8.8.8;
-          dns-search=
-          may-fail=false
-
-
+   
 passwd:
   users:
     - name: core
@@ -33,3 +19,14 @@ passwd:
         - wheel
         - docker
       shell: /bin/bash
+
+networkd:
+  units:
+    - name: 00-ens18.network
+      contents: |
+        [Network]
+        DHCP=no
+        Address=192.168.1.100/24
+        Gateway=192.168.1.1
+        DNS=8.8.8.8 8.8.4.4
+
