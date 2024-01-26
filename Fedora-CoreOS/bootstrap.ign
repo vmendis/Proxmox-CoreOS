@@ -27,13 +27,6 @@
         },
         "mode": 420,
         "path": "/etc/hostname"
-      },
-      {
-        "contents": {
-          "source": "data:,%5Bconnection%5D%0Aid%3Dens18%0Atype%3Dethernet%0Ainterface-name%3Dens18%0A%5Bipv4%5D%0Aaddress1%3D192.168.1.50%2F24%2C192.168.1.1%0Adns%3D8.8.8.8%3B%0Adns-search%3D%0Amay-fail%3Dfalse%0A"
-        },
-        "mode": 384,
-        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection"
       }
     ]
   }
