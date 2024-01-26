@@ -6,7 +6,7 @@ storage:
       mode: 0644
       contents:
         inline: |
-          core
+          brick
     - path: /etc/NetworkManager/system-connections/ens18.nmconnection
       mode: 0600
       contents:
@@ -20,6 +20,7 @@ storage:
           dns=8.8.8.8;8.8.4.4
           dns-search=
           may-fail=false
+          method=manual
 
 
 passwd:
