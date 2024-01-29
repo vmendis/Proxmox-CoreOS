@@ -34,6 +34,12 @@
         },
         "mode": 384,
         "path": "/etc/NetworkManager/system-connections/ens18.nmconnection"
+      },
+      {
+        "contents": {
+          "source": "data:,kernel.sysrq%20%3D%200%0A"
+        },
+        "path": "/etc/sysctl.d/90-sysrq.conf"
       }
     ],
     "links": [

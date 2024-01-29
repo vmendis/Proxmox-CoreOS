@@ -20,8 +20,7 @@ I am using this ignition file which was created some time ago:
 
 
 I have shortned the github url so I can type it easily on CoreOS using free service:
-   https://y.gy
-
+   curl https://y.gy/4Vmj
 
 Fedora CoreOS Setup:
 
