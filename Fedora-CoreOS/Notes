@@ -12,9 +12,7 @@ Configueration Files
 Link to yaml file: 
    https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Fedora-CoreOS/bootstrap.yaml
 
-This yaml file requires tranpiling to an Igntion config file.
-
-Use this online service:
+This yaml file requires tranpiling to an Igntion config file. Use this online service:
     https://fcct.techoverflow.net/
 
 I am using this ignition file which was created some time ago:

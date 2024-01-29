@@ -21,7 +21,13 @@ storage:
           dns-search=
           may-fail=false
           method=manual
+# As an example on how to do, I am setting the time zone
+# In real life, it is better to keep servers on UTC to avoid issues related to adjusting clocks for
+# daylight savings.
 
+  links:
+    - path: /etc/localtime
+      target: ../usr/share/zoneinfo/America/New_York
 
 passwd:
   users:

@@ -35,6 +35,12 @@
         "mode": 384,
         "path": "/etc/NetworkManager/system-connections/ens18.nmconnection"
       }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/America/New_York"
+      }
     ]
   }
 }
