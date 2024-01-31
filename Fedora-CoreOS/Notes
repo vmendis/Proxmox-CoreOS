@@ -33,6 +33,8 @@ curl https://y.gy/4Vmj -L -o bootstrap.ign
 
 view bootstrap.ign    // Sanity check the ignition file
 
+lsblk -a
+
 sudo coreos-installer install /dev/sda --ignition-file  bootstrap.ign
 
 sudo init 6
