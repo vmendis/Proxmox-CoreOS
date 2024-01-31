@@ -67,3 +67,6 @@ systemd:
         Type=oneshot
         RemainAfterExit=yes
         ExecStart=/usr/bin/rpm-ostree install qemu-guest-agent
+
+        [Install]
+        WantedBy=multi-user.target        
