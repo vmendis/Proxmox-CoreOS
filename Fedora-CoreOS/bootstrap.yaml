@@ -35,9 +35,6 @@ storage:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
 
-
-
-
 passwd:
   users:
     - name: core
@@ -49,3 +46,24 @@ passwd:
         - wheel
         - docker
       shell: /bin/bash
+
+systemd:
+  units:
+    - name: postinst.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initial System Setup
+        # We run after `systemd-machine-id-commit.service` to ensure that
+        # `ConditionFirstBoot=true` services won't rerun on the next boot.
+        After=systemd-machine-id-commit.service
+        After=network-online.target
+        # We run before `zincati.service` to avoid conflicting rpm-ostree
+        # transactions.
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/%N.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/rpm-ostree install qemu-guest-agent
