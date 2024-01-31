@@ -156,7 +156,7 @@ echo "VM core will be $CORES"
 echo "VM Disk will be $DISKSIZE"
 
 
-qm create $VMID --name $NEWHOSTNAME --cdrom local:iso/fedora-coreos-39.20231204.3.3-live.x86_64.iso --bootdisk scsi0 --scsihw virtio-scsi-pci --scsi0 file=local-lvm:$DISKSIZE --cores $CORES --sockets 1 --memory $MEMORY --cpu cputype=x86-64-v2-AES -ostype l26  --net0 bridge=vmbr0,tag=10,virtio --boot order='scsi0;ide2'
+qm create $VMID --name $NEWHOSTNAME --cdrom local:iso/fedora-coreos-39.20231204.3.3-live.x86_64.iso --bootdisk scsi0 --scsihw virtio-scsi-pci --scsi0 file=local-lvm:$DISKSIZE --cores $CORES --sockets 1 --memory $MEMORY --cpu cputype=x86-64-v2-AES -ostype l26  --net0 bridge=vmbr0,tag=10,virtio --boot order='scsi0;ide2'  --agent enabled=1
 
 
 if [[ $VLANYESORNO =~ ^[Yy]$ || $VLANYESORNO =~ ^[yY][eE][sS] ]]
