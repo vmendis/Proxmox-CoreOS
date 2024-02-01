@@ -41,9 +41,9 @@
           "wheel",
           "sudo"
         ],
-        "name": "tomster",
+        "name": "bounty",
         "sshAuthorizedKeys": [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkTKkJS7Id1WCyA5Klu/moLG9mP5hTC+v2qYqypMF1u contact@tommytran.io"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKh01qL1ltb1fyAGqC7VTKHribrge6bUiQkl0ixunwtZ bounty@fishtank"
         ]
       },
       {
