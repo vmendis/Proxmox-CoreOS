@@ -17,9 +17,9 @@ variant: fcos
 version: 1.5.0
 passwd:
   users:
-    - name: tomster
+    - name: bounty
       ssh_authorized_keys:
-        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkTKkJS7Id1WCyA5Klu/moLG9mP5hTC+v2qYqypMF1u contact@tommytran.io
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKh01qL1ltb1fyAGqC7VTKHribrge6bUiQkl0ixunwtZ bounty@fishtank
       groups:
         - wheel
         - sudo
