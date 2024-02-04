@@ -52,9 +52,9 @@
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree install qemu-guest-agent\n\n[Install]\nWantedBy=multi-user.target        ",
+        "contents": "[Unit]\nDescription=Geco-iT Setup Qemu Guest Agent\nAfter=network-online.target\nRequire=network-online.target\nConditionKernelCommandLine=ignition.platform.id=qemu\nConditionPathExists=!/var/lib/qemu-guest-agent.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/bin/rpm-ostree install qemu-guest-agent\nExecStart=/bin/touch /var/lib/qemu-guest-agent.stamp\nExecStart=/bin/systemctl --no-block reboot\n",
         "enabled": true,
-        "name": "postinst.service"
+        "name": "setup-qemu-guest-agent.service"
       }
     ]
   }
