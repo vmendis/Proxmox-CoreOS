@@ -67,3 +67,5 @@ systemd:
         ExecStart=/bin/touch /var/lib/qemu-guest-agent.stamp
         ExecStart=/bin/systemctl --no-block reboot
    
+        [Install]
+        WantedBy=multi-user.target
