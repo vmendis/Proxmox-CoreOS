@@ -52,7 +52,7 @@
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Geco-iT Setup Qemu Guest Agent\nAfter=network-online.target\nRequire=network-online.target\nConditionKernelCommandLine=ignition.platform.id=qemu\nConditionPathExists=!/var/lib/qemu-guest-agent.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/bin/rpm-ostree install qemu-guest-agent\nExecStart=/bin/touch /var/lib/qemu-guest-agent.stamp\nExecStart=/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target",
+        "contents": "[Unit]\nDescription=Install Qemu Guest Agent\nBefore=boot-complete.target\nAfter=network-online.target\nRequire=network-online.target\nConditionKernelCommandLine=ignition.platform.id=qemu\nConditionPathExists=!/var/lib/qemu-guest-agent.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/bin/rpm-ostree install qemu-guest-agent\nExecStart=/bin/touch /var/lib/qemu-guest-agent.stamp\nExecStart=/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target",
         "enabled": true,
         "name": "setup-qemu-guest-agent.service"
       }
