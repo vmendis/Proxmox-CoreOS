@@ -54,3 +54,27 @@ Ignition documentaion from Fedora:
 
 
   
+Known Issues:
+
+1. Warning about installing qemu agent
+
+ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.50
+Fedora CoreOS 39.20240112.3.0
+Tracker: https://github.com/coreos/fedora-coreos-tracker
+Discuss: https://discussion.fedoraproject.org/tag/coreos
+
+Last login: Mon Feb  5 03:45:31 2024 from 192.168.1.32
+[systemd]
+Failed Units: 1
+  install-qemu-agent.service
+
+When connecting to the FCOS serever using ssh, message about the failed unit is displayed.
+However, the qemu agent has been installed and running. This can be seen on Proxmox as the
+IP number of the FCOS is listed.
+
+
+$ ps -aef|grep agent
+root         933       1  0 03:42 ?        00:00:00 /usr/bin/qemu-ga --method=virtio-serial --path=/dev/virtio-ports/org.qemu.guest_agent.0 --blacklist= -F/etc/qemu-ga/fsfreeze-hook
+
+Will try to fix this sometime as the functioanlity is not broken.
+
