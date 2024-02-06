@@ -1,0 +1,65 @@
+WIP Notes. These will be beautified later on
+
+
+From: https://vincentdeborger.be/blog/building-a-kubernetes-ready-fedora-coreos-image/
+
+The idea is to create Kubernetes ready build image
+
+
+Configueration Files
+
+Link to yaml file: 
+
+This yaml file requires tranpiling to an Igntion config file. Use this online service: https://fcct.techoverflow.net/
+
+I am using this ignition file which was created some time ago:
+
+
+I have shortned the github url so I can type it easily on CoreOS using free service: https://y.gy/4Vmj
+
+Fedora CoreOS Setup:
+
+Setup a VM on Proxmox for CoreOS
+Boot from the CoreOS LiveCD
+   -- Add image of console
+
+cd /tmp
+curl  -L -o bootstrap.ign
+
+view bootstrap.ign    // Sanity check the ignition file
+
+lsblk -a
+
+sudo coreos-installer install /dev/sda --ignition-file  bootstrap.ign
+
+sudo init 6
+
+Access newly created CoreOS using ssh
+   $ ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.51
+
+
+  
+Known Issues:
+
+1. Warning about installing qemu agent
+
+ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.50
+Fedora CoreOS 39.20240112.3.0
+Tracker: https://github.com/coreos/fedora-coreos-tracker
+Discuss: https://discussion.fedoraproject.org/tag/coreos
+
+Last login: Mon Feb  5 03:45:31 2024 from 192.168.1.32
+[systemd]
+Failed Units: 1
+  install-qemu-agent.service
+
+When connecting to the FCOS serever using ssh, message about the failed unit is displayed.
+However, the qemu agent has been installed and running. This can be seen on Proxmox as the
+IP number of the FCOS is listed.
+
+
+$ ps -aef|grep agent
+root         933       1  0 03:42 ?        00:00:00 /usr/bin/qemu-ga --method=virtio-serial --path=/dev/virtio-ports/org.qemu.guest_agent.0 --blacklist= -F/etc/qemu-ga/fsfreeze-hook
+
+Will try to fix this sometime as the functioanlity is not broken.
+
