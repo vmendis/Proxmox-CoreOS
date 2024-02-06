@@ -8,11 +8,11 @@ The idea is to create Kubernetes ready build image
 
 Configueration Files
 
-Link to yaml file: 
+Link to yaml file:  https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.yaml
 
 This yaml file requires tranpiling to an Igntion config file. Use this online service: https://fcct.techoverflow.net/
 
-I am using this ignition file which was created some time ago:
+I am using this ignition file which was created some time ago: https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.ign
 
 
 I have shortned the github url so I can type it easily on CoreOS using free service: https://y.gy/4Vmj
@@ -24,7 +24,7 @@ Boot from the CoreOS LiveCD
    -- Add image of console
 
 cd /tmp
-curl  -L -o bootstrap.ign
+curl https://y.gy/51kG -L -o bootstrap.ign
 
 view bootstrap.ign    // Sanity check the ignition file
 
