@@ -24,7 +24,7 @@ Boot from the CoreOS LiveCD
    -- Add image of console
 
 cd /tmp
-curl https://y.gy/51kG -L -o bootstrap.ign
+curl https://y.gy/4XmZ  -L -o bootstrap.ign
 
 view bootstrap.ign    // Sanity check the ignition file
 
