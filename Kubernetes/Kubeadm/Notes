@@ -10,7 +10,7 @@ Configueration Files
 
 Link to yaml file:  https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.yaml
 
-This yaml file requires tranpiling to an Igntion config file. Use this online service: https://fcct.techoverflow.net/
+This yaml file requires transpiling to an Igntion config file. Use this online service: https://fcct.techoverflow.net/
 
 I am using this ignition file which was created some time ago: https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.ign
 
@@ -35,8 +35,77 @@ sudo coreos-installer install /dev/sda --ignition-file  bootstrap.ign
 sudo init 6
 
 Access newly created CoreOS using ssh
-   $ ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.51
+   $ ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.xx
 
+
+Let the new server reboot few times.
+
+When the IP number of the new server is visible in Proxmox GUI, it is good to go
+
+
+Part 2 Kubernetes Setup
+
+Installing CRI-O
+
+rpm-ostree install cri-o
+
+# Make sure to reboot to have layered package available
+systemctl reboot
+
+modprobe overlay && modprobe br_netfilter
+
+# Kernel module should be loaded on every reboot
+cat <<EOF > /etc/modules-load.d/crio-net.conf
+overlay
+br_netfilter
+EOF
+
+rpm-ostree install kubelet kubeadm kubectl
+
+systemctl reboot
+
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+systemctl start crio.service     / Not  systemctl enable --now cri-o ??
+systemctl enable --now kubelet
+
+
+echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
+
+
+root@boooo:~# IPADDR="192.168.1.71"
+root@boooo:~# NODENAME=$(hostname -s)
+root@boooo:~# POD_CIDR="10.244.0.0/16"
+
+kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
+
+Exit root shell
+
+
+kubectl cluster-info
+
+kubectl get po -n kube-system
+kubectl get --raw='/readyz?verbose'
+
+kubectl get pods --all-namespaces
+kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
+
+
+Install Calico
+
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml -O
+vi custom-resources.yaml
+   Modify cidr accordingly
+kubectl create -f custom-resources.yaml
+
+
+kubectl get po -n kube-system
+
+
+you will see calico pods and running CoreDNS pods.     -- idont see these
 
   
 Known Issues:
