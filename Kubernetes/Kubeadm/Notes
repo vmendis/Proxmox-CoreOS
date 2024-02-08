@@ -86,9 +86,9 @@ systemctl enable --now kubelet
 echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
 
 
-root@boooo:~# IPADDR="192.168.1.71"
-root@boooo:~# NODENAME=$(hostname -s)
-root@boooo:~# POD_CIDR="10.244.0.0/16"
+IPADDR="192.168.1.71"
+NODENAME=$(hostname -s)
+POD_CIDR="10.244.0.0/16"
 
 kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
 

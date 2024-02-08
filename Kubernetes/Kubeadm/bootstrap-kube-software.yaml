@@ -107,7 +107,27 @@ storage:
 
           #--------------------------
           echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
+          IPADDR="192.168.1.71"
+          NODENAME=$(hostname -s)
+          POD_CIDR="10.244.0.0/16"
+          #--------------------------
+          kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
 
+    # ClusterConfugueration
+    - path: /var/tmp/kubeadm-custom.yaml
+      mode: 0777
+      contents:
+        inline: |
+          apiVersion: kubeadm.k8s.io/v1beta3
+          kind: ClusterConfiguration
+          kubernetesVersion: v1.28.6
+          controllerManager:
+            extraArgs:
+              flex-volume-plugin-dir: "/etc/kubernetes/kubelet-plugins/volume/exec"
+          networking:
+            podSubnet: 10.244.0.0/16
+            serviceSubnet: 10.96.0.0/12 # change according to your requirements
+          clusterName: kubernetes-dev
 
 
 # As an example on how to do, I am setting the time zone
