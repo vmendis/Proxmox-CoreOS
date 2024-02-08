@@ -79,11 +79,36 @@ storage:
           may-fail=false
           method=manual
 
-# Example. Configuering a kernel tunable
+    # Example. Configuering a kernel tunable
     - path: /etc/sysctl.d/90-sysrq.conf
       contents:
         inline: |
           kernel.sysrq = 0
+
+    # This script is run manually after the passes it's initial configueration
+    - path: /var/tmp/setup.sh
+      mode: 0777
+      contents:
+        inline: |
+          #!/usr/bin/bash
+          rpm-ostree install cri-o
+          systemctl reboot
+          #--------------------------
+          modprobe overlay && modprobe br_netfilter
+          rpm-ostree install kubelet kubeadm kubectl
+          systemctl reboot
+          #--------------------------
+          setenforce 0
+          sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+          
+          systemctl enable crio.service
+          systemctl start crio.service
+          systemctl enable kubelet
+
+          #--------------------------
+          echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
+
+
 
 # As an example on how to do, I am setting the time zone
 # In real life, it is better to keep servers on UTC to avoid issues related to adjusting clocks for

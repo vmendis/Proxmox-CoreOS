@@ -64,11 +64,13 @@ systemctl reboot
 
 modprobe overlay && modprobe br_netfilter
 
+-----  Part of Yaml
 # Kernel module should be loaded on every reboot
 cat <<EOF > /etc/modules-load.d/crio-net.conf
 overlay
 br_netfilter
 EOF
+-----  End Part of Yaml
 
 rpm-ostree install kubelet kubeadm kubectl
 
