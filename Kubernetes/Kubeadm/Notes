@@ -43,6 +43,14 @@ Let the new server reboot few times.
 When the IP number of the new server is visible in Proxmox GUI, it is good to go
 
 
+Change IP number and hostname of the server
+
+ssh onto the server
+vi /etc/hostname                             
+vi /etc/NetworkManager/system-connections/ens18.nmconnection
+init 6
+
+----------------------------------
 Part 2 Kubernetes Setup
 
 Installing CRI-O
@@ -51,6 +59,8 @@ rpm-ostree install cri-o
 
 # Make sure to reboot to have layered package available
 systemctl reboot
+
+                  --  systemctl is-active crio      systemctl status crio.service
 
 modprobe overlay && modprobe br_netfilter
 

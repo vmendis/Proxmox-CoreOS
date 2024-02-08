@@ -38,6 +38,17 @@ storage:
       overwrite: true
       contents:
         inline: br_netfilter
+
+    # kernel module for cri-o
+    - path: /etc/modules-load.d/crio-net.conf
+      mode: 0644
+      overwrite: true
+      contents:
+        inline: |
+          overlay
+          br_netfilter
+
+
     # setting kernel parameters required by kubelet
     - path: /etc/sysctl.d/kubernetes.conf
       mode: 0644
