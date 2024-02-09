@@ -106,7 +106,7 @@ kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:
 
 Install Calico
 
-
+sudo sysctl net.bridge.bridge-nf-call-iptables=1
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
 curl https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml -O
 vi custom-resources.yaml
@@ -114,7 +114,7 @@ vi custom-resources.yaml
 kubectl create -f custom-resources.yaml
 
 
-kubectl get po -n kube-system
+kubectl get pods --all-namespaces
 
 
 you will see calico pods and running CoreDNS pods.     -- idont see these
@@ -143,4 +143,17 @@ $ ps -aef|grep agent
 root         933       1  0 03:42 ?        00:00:00 /usr/bin/qemu-ga --method=virtio-serial --path=/dev/virtio-ports/org.qemu.guest_agent.0 --blacklist= -F/etc/qemu-ga/fsfreeze-hook
 
 Will try to fix this sometime as the functioanlity is not broken.
+
+2. CoreOS/ Calico is broken!
+
+When I started this project my intention was to use Calico as the Kubernetes CNI.
+Calico failed to start and investigation led me to this bug report. Joys of using
+OpenSource software!
+
+https://github.com/projectcalico/calico/issues/2712
+
+Both kube-router (https://github.com/cloudnativelabs/kube-router) ("cniVersion":"0.3.0")and
+Flannel https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 
+is working as of 9.Feb.2024
+
 

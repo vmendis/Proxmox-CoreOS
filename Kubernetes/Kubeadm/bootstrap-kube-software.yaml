@@ -91,6 +91,10 @@ storage:
       contents:
         inline: |
           #!/usr/bin/bash
+          vi /etc/hostname
+          vi /etc/NetworkManager/system-connections/ens18.nmconnection
+          systemctl reboot
+          #--------------------------
           rpm-ostree install cri-o
           systemctl reboot
           #--------------------------
@@ -103,7 +107,10 @@ storage:
           
           systemctl enable crio.service
           systemctl start crio.service
+          systemctl status crio.service
           systemctl enable kubelet
+          systemctl start kubelet
+          systemctl status kubelet
 
           #--------------------------
           echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
@@ -113,7 +120,7 @@ storage:
           #--------------------------
           kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
 
-    # ClusterConfugueration
+    # ClusterConfiguration
     - path: /var/tmp/kubeadm-custom.yaml
       mode: 0777
       contents:
