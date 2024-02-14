@@ -95,11 +95,10 @@ storage:
           vi /etc/NetworkManager/system-connections/ens18.nmconnection
           systemctl reboot
           #--------------------------
-          rpm-ostree install cri-o
+          rpm-ostree install cri-o kubelet kubeadm kubectl
           systemctl reboot
           #--------------------------
           modprobe overlay && modprobe br_netfilter
-          rpm-ostree install kubelet kubeadm kubectl
           systemctl reboot
           #--------------------------
           setenforce 0
