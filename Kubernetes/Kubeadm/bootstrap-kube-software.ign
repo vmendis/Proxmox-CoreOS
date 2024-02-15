@@ -1,1 +1,159 @@
-{"ignition":{"version":"3.2.0"},"passwd":{"users":[{"groups":["wheel","docker"],"homeDir":"/home/core","name":"core","passwordHash":"$1$yoursalt$RW7qzat1/SKJxvrq4MRo5.","sshAuthorizedKeys":["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCS2n5eawz4UHNh3mBnTGvxZUsaWqZIq1nu0v9i0htXzHTjYxjz2Cn2SNf7U1orkzsMQO5QHkR5hBnK6ePnINcWpReEP8gisnXjEDC/Y4c5uvn0MxGHMeIKIhNWBbFBf4WuBOznp9DjNpoJd51I6LL5PvRQu533sZ+xgI0iIWpAj+CY0hFdIFNAzhjBe98hrPcQK151X+J+NNLMGwgVnHwE6MZm+R7Bh0eq7ST5Ro3I8i7DfmpIyMdgtc27gnk4hHk5VaDc85EcBwIzVAusH/M8biUJAM+1VAGibuqwjttkok2JM1oTVEdrrlGkJbWhifqYoYIUKT26W14+dHqcUGp1SYRa3TAZ/Szr7LvTucB2E2/mj4Cey1Gl2W+tZpydPrkASXZp1JDZTCHCLyb7+pBqGcSenVTI07WL1Kzxqw8892f+l8bZ+CHCjWnGWa8ge9VZmltJlDm0ZGw/dJk342VadtqtQczVSSH2p7cEdsMooIMnesOk6PgU3xQTtnkievk= bounty@fishtank"],"shell":"/bin/bash"}]},"storage":{"directories":[{"path":"/var/cache/rpm-ostree-install"}],"files":[{"overwrite":true,"path":"/etc/dnf/modules.d/cri-o.module","contents":{"compression":"","source":"data:,%5Bcri-o%5D%0Aname%3Dcri-o%0Astream%3D1.27%0Aprofiles%3D%0Astate%3Denabled%0A"},"mode":420},{"overwrite":true,"path":"/etc/yum.repos.d/kubernetes.repo","contents":{"compression":"gzip","source":"data:;base64,H4sIAAAAAAAC/4yOwWrDMAxA7/4KQc+x19I2ZZDrLvuEMYrsqEqwYxvLhuXvR8fW9ZiT4KGnpw/fLJVIleRTRVxoeH8AZVGolTBMtWZ5NSaj88gk2oXURs0pcSDt0mLWtphCOYn5v9dR6Luvy/l6PiqKaAONw17tgDO7iZwf9gBqB3ft+sTqNAvMArfmPI0ta/jL81ynZn96XPCGEQ0yxWpmkUZiTv3pAr1+I6sPL4ej4sye1o3fj8ndZ+dp1ZxZAWz3Sl66362H/x0AAP//B9cBi1kBAAA="},"mode":420},{"overwrite":true,"path":"/etc/modules-load.d/br_netfilter.conf","contents":{"compression":"","source":"data:,br_netfilter"},"mode":420},{"overwrite":true,"path":"/etc/modules-load.d/crio-net.conf","contents":{"compression":"","source":"data:,overlay%0Abr_netfilter%0A"},"mode":420},{"overwrite":true,"path":"/etc/sysctl.d/kubernetes.conf","contents":{"compression":"","source":"data:,net.bridge.bridge-nf-call-iptables%3D1%0Anet.ipv4.ip_forward%3D1%0A"},"mode":420},{"path":"/etc/hostname","contents":{"compression":"","source":"data:,brick%0A"},"mode":420},{"path":"/etc/NetworkManager/system-connections/ens18.nmconnection","contents":{"compression":"gzip","source":"data:;base64,H4sIAAAAAAAC/0TIQWqGMBDF8f2cQlzXlJG0WMqcowtxMSRPDJhRkrTg7YvfRh48+P/mcJghtHTYQilK/5MKYvdoxz2164SgbSiGRskayqoBg2mGwCpPNKfzzy+kMRbUysJfo+PPybH74PfRvz3NFK3K5F77vt87f9tQoSVsQlmvYdW0y6p7BWW07YiS1X51p/8AAAD//+yupO+xAAAA"},"mode":384},{"path":"/etc/sysctl.d/90-sysrq.conf","contents":{"compression":"","source":"data:,kernel.sysrq%20%3D%200%0A"}},{"path":"/var/tmp/setup.sh","contents":{"compression":"gzip","source":"data:;base64,H4sIAAAAAAAC/5STQWvbQBCF7/oVW8ck7WG1VghpetDBrUUxTZzgJJBTzWo1tpesZsXM2I2hP77YslJDG0N0GXhveHr6GJ18MCsmU3o0peVlsvbKgDizjCxoa3gVJiC/Ij3fWLQLIMMbFqi1i4jgxEdkA8jZVYr1Xy1pt5wERVDGKMmJfvNJqKl1ZCEA5ZHFhqAceR3V86qEALKbtqp300l4X3odq4ZiCSqugYLdqNNT9aqVNEOQuQ8C9L5YBgGcR3KgBglDpbRXZ2x+3hfX48njU96aHhd900kNUO2Z/RrMWcuWIXhcvRgXce4XyUEDQFsG2HKIKQOtvYMDl8WSHDFlxW+5++A92n8y/6tv4zrjKBRwy6h6Px6/FtfFw6x4epgOZ8Pp9/tca7eguGp0RX4NlLfxVU/9VgKwh7HhloPp3jW+G45G07yXfTlPs8urNEs/Z71kcjsqJsObIu9/7I5Vaf6U3N2OZt/Gu/1Ben5xkQ7Sgckue0cbd6fl0YvS27MWikE3wSJowKqJHiXvt02U0to2fgsVSDsg0fAiZDVb5MOlJlYa2/9GO19R3u/KKa0xVqB3rfvdpyR/AgAA//9jMOysjgMAAA=="},"mode":511},{"path":"/var/tmp/kubeadm-custom.yaml","contents":{"compression":"gzip","source":"data:;base64,H4sIAAAAAAAC/0yQQU/DMAyF7/kV1jg3Xcc0jd7QznBB4p6lbyFq6gzHKePfo1IE3Gw9v0/W567xFVJi5p7GeoYbJjsei425nbsz1N2bMfLQ0ynVopBT5ksMVZzGzGZpCENRfiFzZ3dHezA+s0pOCfLk2AVIb4hwU3GPEsqyEF0Sbs2cU53QXFMNkZshSk+bFurbP/j3mKA/R6VdOy1u8BvD0I8sY+SwUK95eKlnhvbUbe1uv7dbu227gyEqkDl6/IsfDmu6ozvyb44DyHmfZYgcSDN95iokeK9RMIG1GL9qeHYTVmHrh82A2XwFAAD//4iAQAxMAQAA"},"mode":511}],"links":[{"path":"/etc/localtime","target":"../usr/share/zoneinfo/America/New_York"}]},"systemd":{"units":[{"contents":"[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree install qemu-guest-agent\n\n[Install]\nWantedBy=multi-user.target        \n","enabled":true,"name":"install-qemu-agent.service"},{"contents":"[Unit]\nDescription=Layer %i with rpm-ostree\nWants=network-online.target\nAfter=network-online.target\nBefore=zincati.service\nConditionPathExists=!/var/cache/rpm-ostree-install/%i.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/flock /var/cache/rpm-ostree-install/.lock -c \"/usr/bin/rpm-ostree install --assumeyes --idempotent --reboot --allow-inactive %i | tee /var/cache/rpm-ostree-install/%i.stamp\"\n\n[Install]\nWantedBy=multi-user.target\n","enabled":true,"name":"rpm-ostree-install@.service"}]}}
+{
+  "ignition": {
+    "version": "3.2.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "docker"
+        ],
+        "homeDir": "/home/core",
+        "name": "core",
+        "passwordHash": "$1$yoursalt$RW7qzat1/SKJxvrq4MRo5.",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCS2n5eawz4UHNh3mBnTGvxZUsaWqZIq1nu0v9i0htXzHTjYxjz2Cn2SNf7U1orkzsMQO5QHkR5hBnK6ePnINcWpReEP8gisnXjEDC/Y4c5uvn0MxGHMeIKIhNWBbFBf4WuBOznp9DjNpoJd51I6LL5PvRQu533sZ+xgI0iIWpAj+CY0hFdIFNAzhjBe98hrPcQK151X+J+NNLMGwgVnHwE6MZm+R7Bh0eq7ST5Ro3I8i7DfmpIyMdgtc27gnk4hHk5VaDc85EcBwIzVAusH/M8biUJAM+1VAGibuqwjttkok2JM1oTVEdrrlGkJbWhifqYoYIUKT26W14+dHqcUGp1SYRa3TAZ/Szr7LvTucB2E2/mj4Cey1Gl2W+tZpydPrkASXZp1JDZTCHCLyb7+pBqGcSenVTI07WL1Kzxqw8892f+l8bZ+CHCjWnGWa8ge9VZmltJlDm0ZGw/dJk342VadtqtQczVSSH2p7cEdsMooIMnesOk6PgU3xQTtnkievk= bounty@fishtank"
+        ],
+        "shell": "/bin/bash"
+      }
+    ]
+  },
+  "storage": {
+    "directories": [
+      {
+        "path": "/var/cache/rpm-ostree-install"
+      }
+    ],
+    "files": [
+      {
+        "overwrite": true,
+        "path": "/etc/dnf/modules.d/cri-o.module",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bcri-o%5D%0Aname%3Dcri-o%0Astream%3D1.27%0Aprofiles%3D%0Astate%3Denabled%0A"
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/yum.repos.d/kubernetes.repo",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/4yOwWrDMAxA7/4KQc+x19I2ZZDrLvuEMYrsqEqwYxvLhuXvR8fW9ZiT4KGnpw/fLJVIleRTRVxoeH8AZVGolTBMtWZ5NSaj88gk2oXURs0pcSDt0mLWtphCOYn5v9dR6Luvy/l6PiqKaAONw17tgDO7iZwf9gBqB3ft+sTqNAvMArfmPI0ta/jL81ynZn96XPCGEQ0yxWpmkUZiTv3pAr1+I6sPL4ej4sye1o3fj8ndZ+dp1ZxZAWz3Sl66362H/x0AAP//B9cBi1kBAAA="
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/modules-load.d/br_netfilter.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,br_netfilter"
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/modules-load.d/crio-net.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,overlay%0Abr_netfilter%0A"
+        },
+        "mode": 420
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/sysctl.d/kubernetes.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,net.bridge.bridge-nf-call-iptables%3D1%0Anet.ipv4.ip_forward%3D1%0A"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "compression": "",
+          "source": "data:,brick%0A"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/0TIQWqGMBDF8f2cQlzXlJG0WMqcowtxMSRPDJhRkrTg7YvfRh48+P/mcJghtHTYQilK/5MKYvdoxz2164SgbSiGRskayqoBg2mGwCpPNKfzzy+kMRbUysJfo+PPybH74PfRvz3NFK3K5F77vt87f9tQoSVsQlmvYdW0y6p7BWW07YiS1X51p/8AAAD//+yupO+xAAAA"
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/sysctl.d/90-sysrq.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,kernel.sysrq%20%3D%200%0A"
+        }
+      },
+      {
+        "path": "/var/tmp/0.sh",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23!%2Fusr%2Fbin%2Fbash%0Avi%20%2Fetc%2Fhostname%0Avi%20%2Fetc%2FNetworkManager%2Fsystem-connections%2Fens18.nmconnection%0Asystemctl%20reboot%0A"
+        },
+        "mode": 511
+      },
+      {
+        "path": "/var/tmp/1.sh",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23!%2Fusr%2Fbin%2Fbash%0Arpm-ostree%20install%20cri-o%20kubelet%20kubeadm%20kubectl%0Asystemctl%20reboot%0A"
+        },
+        "mode": 511
+      },
+      {
+        "path": "/var/tmp/2.sh",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23!%2Fusr%2Fbin%2Fbash%0Amodprobe%20overlay%20%26%26%20modprobe%20br_netfilter%0Asystemctl%20reboot%0A"
+        },
+        "mode": 511
+      },
+      {
+        "path": "/var/tmp/3.sh",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/3yQwWrcMBCG73oK1TGkPYxlh5C2Bx/c2pSl6SZsEsipiyxNdkVsyWjG2wT68GXjGALNro7zDf98+k8+qJGiap1XraatIGT0DyEalLkgtBKcPCX1+6a5XCzv7ssJOr9J1TwaMPaOyO1QnUqFbBRh5/z4pEzwD24j6JkYe8OdRK/bDqWJLmSEcecMvqHEOvIRyCMdoq/Bj2OLHfJ/me/O93EzECdw8Ak02yCTn3ffmsvmdt3c366qdbX6cVMCmE0M4wA2uh3Gcoq3ifwrGfG1i2eaalDzrcV1VderMim+nmXFxZesyD4XiVhe1c2y+tWU6cdtIPa6Rwn0SVxf1evvi5f9PDs7P8/yLFfFRXLUeH9K214671gCmOA5hg6GTnsE9HYIznOZTiZSAujB7UvFCAYjAz5x1EDa09ulIVjwyH9CfATjbCzTWU4C+GARXqzT+SviXwAAAP//ctvhJF0CAAA="
+        },
+        "mode": 511
+      },
+      {
+        "path": "/var/tmp/kubeadm-custom.yaml",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/0yQQU/DMAyF7/kV1jg3Xcc0jd7QznBB4p6lbyFq6gzHKePfo1IE3Gw9v0/W567xFVJi5p7GeoYbJjsei425nbsz1N2bMfLQ0ynVopBT5ksMVZzGzGZpCENRfiFzZ3dHezA+s0pOCfLk2AVIb4hwU3GPEsqyEF0Sbs2cU53QXFMNkZshSk+bFurbP/j3mKA/R6VdOy1u8BvD0I8sY+SwUK95eKlnhvbUbe1uv7dbu227gyEqkDl6/IsfDmu6ozvyb44DyHmfZYgcSDN95iokeK9RMIG1GL9qeHYTVmHrh82A2XwFAAD//4iAQAxMAQAA"
+        },
+        "mode": 511
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/America/New_York"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree install qemu-guest-agent\n\n[Install]\nWantedBy=multi-user.target        \n",
+        "enabled": true,
+        "name": "install-qemu-agent.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Layer %i with rpm-ostree\nWants=network-online.target\nAfter=network-online.target\nBefore=zincati.service\nConditionPathExists=!/var/cache/rpm-ostree-install/%i.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/flock /var/cache/rpm-ostree-install/.lock -c \"/usr/bin/rpm-ostree install --assumeyes --idempotent --reboot --allow-inactive %i | tee /var/cache/rpm-ostree-install/%i.stamp\"\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "rpm-ostree-install@.service"
+      }
+    ]
+  }
+}
