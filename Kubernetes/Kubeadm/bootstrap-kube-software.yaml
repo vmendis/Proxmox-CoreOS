@@ -123,8 +123,6 @@ storage:
           systemctl start crio.service
           systemctl status crio.service
           systemctl enable kubelet
-          systemctl start kubelet
-          systemctl status kubelet
 
           #--------------------------
           echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
