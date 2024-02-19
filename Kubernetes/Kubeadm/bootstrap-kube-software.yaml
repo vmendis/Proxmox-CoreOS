@@ -130,8 +130,8 @@ storage:
           NODENAME=$(hostname -s)
           POD_CIDR="10.244.0.0/16"
           #--------------------------
-          kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
-
+          # kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
+          kubeadm init --config kubeadm-custom.yaml
     # ClusterConfiguration
     - path: /var/tmp/kubeadm-custom.yaml
       mode: 0777

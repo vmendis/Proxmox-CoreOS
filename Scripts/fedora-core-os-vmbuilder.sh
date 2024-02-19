@@ -14,7 +14,7 @@
 
 echo
 while true; do
-   read -r -p "Enter desired hostname for the Virutal Machine: " NEWHOSTNAME
+   read -r -p "Enter desired VM name for the Virutal Machine: " NEWHOSTNAME
    if [[ ! $NEWHOSTNAME == *['!'@#\$%^\&*()\_+\']* ]];then
       break;
    else

@@ -1,12 +1,12 @@
 WIP Notes. These will be beautified later on
 
-
+Part 1
 From: https://vincentdeborger.be/blog/building-a-kubernetes-ready-fedora-coreos-image/
 
 The idea is to create Kubernetes ready build image
 
 
-Configueration Files
+a. Configueration Files
 
 Link to yaml file:  https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.yaml
 
@@ -17,9 +17,9 @@ I am using this ignition file which was created some time ago: https://github.co
 
 I have shortned the github url so I can type it easily on CoreOS using free service: https://y.gy/4Vmj
 
-Fedora CoreOS Setup:
+b. Fedora CoreOS Setup:
 
-Setup a VM on Proxmox for CoreOS
+Setup a VM on Proxmox for CoreOS.  An automated script is in here: ../Scripts/fedora-core-os-vmbuilder.sh
 Boot from the CoreOS LiveCD
    -- Add image of console
 
@@ -43,57 +43,45 @@ Let the new server reboot few times.
 When the IP number of the new server is visible in Proxmox GUI, it is good to go
 
 
-Change IP number and hostname of the server
+----------------------------------
+Part 2 Kubernetes Software Installation
 
+Code to perform Kubernetes setup is pushed through bootstrap-kube-software.yaml
+onto the host and saved in /var/tmp
+
+Once the host is up and running ssh onto it and run:
+cd /var/tmp
+./1.sh
+./2.sh
+
+Now it is good time either to create a Proxmox template or use this host as the base for other hosts in
+the Kubernetes clsuster and clone this as necessary. Choise is yours.
+
+Part 3 Kubernetes Setup
+
+In this part, we are setting up the Kubernetes Cluster. Clone a new host from the Proxmox Template or the host created in Part 2.
+
+a. Change IP number and hostname of the server
 ssh onto the server
+Instructions for these is in /var/tmp/0.sh
+
 vi /etc/hostname                             
 vi /etc/NetworkManager/system-connections/ens18.nmconnection
 init 6
 
-----------------------------------
-Part 2 Kubernetes Setup
+b. Kubernetes configueration
 
-Installing CRI-O
+ssh onto the server
+cd /var/tmp
+./3.sh
 
-rpm-ostree install cri-o
-
-# Make sure to reboot to have layered package available
-systemctl reboot
-
-                  --  systemctl is-active crio      systemctl status crio.service
-
-modprobe overlay && modprobe br_netfilter
-
------  Part of Yaml
-# Kernel module should be loaded on every reboot
-cat <<EOF > /etc/modules-load.d/crio-net.conf
-overlay
-br_netfilter
-EOF
------  End Part of Yaml
-
-rpm-ostree install kubelet kubeadm kubectl
-
-systemctl reboot
-
-setenforce 0
-sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
-
-systemctl start crio.service     / Not  systemctl enable --now cri-o ??
-systemctl enable --now kubelet
-
-
-echo "KUBELET_EXTRA_ARGS=--cgroup-driver=systemd" | tee /etc/sysconfig/kubelet
-
-
-IPADDR="192.168.1.71"
-NODENAME=$(hostname -s)
-POD_CIDR="10.244.0.0/16"
-
-kubeadm init --control-plane-endpoint=$IPADDR  --apiserver-cert-extra-sans=$IPADDR  --pod-network-cidr=$POD_CIDR --node-name $NODENAME
-
+As per the screen output, copy the kube-config
 Exit root shell
 
+
+
+
+Part 4 Verify status of the Kubernetes cluster
 
 kubectl cluster-info
 
@@ -103,21 +91,50 @@ kubectl get --raw='/readyz?verbose'
 kubectl get pods --all-namespaces
 kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
 
+We can see the necessary Kubernetes core components running
+$ sudo crictl pods
+POD ID           CREATED          STATE          NAME                              NAMESPACE         ATTEMPT             RUNTIME
+4cc1779cd7307    11 minutes ago   Ready          coredns-5dd5756b68-jt65c          kube-system         0                   (default)
+654a9dc94b1b1    11 minutes ago   Ready          coredns-5dd5756b68-tmzjt          kube-system         0                   (default)
+b4a40aee2f833    11 minutes ago   Ready          kube-proxy-pj5rs                  kube-system         0                   (default)
+4da003bcf5ada    12 minutes ago   Ready          etcd-k8-master1                   kube-system         0                   (default)
+5b464632ba520    12 minutes ago   Ready          kube-controller-manager-k8-master1   kube-system      0                   (default)
+848aad3e20c90    12 minutes ago   Ready          kube-apiserver-k8-master1         kube-system         0                   (default)
+9de2aba91bcc4    12 minutes ago   Ready          kube-scheduler-k8-master1         kube-system         0                   (default)
 
-Install Calico
+
+
+Part 5 - Setup Networking using Flannel 
 
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
-curl https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml -O
-vi custom-resources.yaml
-   Modify cidr accordingly
-kubectl create -f custom-resources.yaml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+namespace/kube-flannel created
+clusterrole.rbac.authorization.k8s.io/flannel created
+clusterrolebinding.rbac.authorization.k8s.io/flannel created
+serviceaccount/flannel created
+configmap/kube-flannel-cfg created
+daemonset.apps/kube-flannel-ds created
 
 
 kubectl get pods --all-namespaces
+NAMESPACE      NAME                                 READY   STATUS    RESTARTS   AGE
+kube-flannel   kube-flannel-ds-78rxf                1/1     Running   0          26s
+kube-system    coredns-5dd5756b68-jt65c             1/1     Running   1          2d23h
+kube-system    coredns-5dd5756b68-tmzjt             1/1     Running   1          2d23h
+kube-system    etcd-k8-master1                      1/1     Running   2          2d23h
+kube-system    kube-apiserver-k8-master1            1/1     Running   1          2d23h
+kube-system    kube-controller-manager-k8-master1   1/1     Running   1          2d23h
+kube-system    kube-proxy-pj5rs                     1/1     Running   1          2d23h
+kube-system    kube-scheduler-k8-master1            1/1     Running   1          2d23h
 
 
-you will see calico pods and running CoreDNS pods.     -- idont see these
+$ sudo crictl pods
+POD ID        CREATED          STATE          NAME                         NAMESPACE           ATTEMPT             RUNTIME
+7dee13dd178c3 2 minutes ago    Ready          kube-flannel-ds-78rxf        kube-flannel        0                   (default)
+...
+...
+
 
   
 Known Issues:
@@ -155,5 +172,10 @@ https://github.com/projectcalico/calico/issues/2712
 Both kube-router (https://github.com/cloudnativelabs/kube-router) ("cniVersion":"0.3.0")and
 Flannel https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 
 is working as of 9.Feb.2024
+
+
+References:
+1 .Kubernetes Architectue
+https://spot.io/resources/kubernetes-architecture/11-core-components-explained/
 
 
