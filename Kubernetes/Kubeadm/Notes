@@ -1,9 +1,8 @@
 WIP Notes. These will be beautified later on
 
 Asuumptions:
-
-Familarity with Proxmox
-Understanding of Kubnernetes
+o Familarity with Proxmox
+o Understanding of Kubnernetes
 
 Part 1
 The idea is to create Kubernetes ready build image that can be used to deploy the nodes required
