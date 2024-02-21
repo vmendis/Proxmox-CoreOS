@@ -1,12 +1,18 @@
 WIP Notes. These will be beautified later on
 
+Asuumptions:
+
+Familarity with Proxmox
+Understanding of Kubnernetes
+
+
 Part 1
-From: https://vincentdeborger.be/blog/building-a-kubernetes-ready-fedora-coreos-image/
 
-The idea is to create Kubernetes ready build image
+The idea is to create Kubernetes ready build image that can be used to deploy the nodes required
+for the Control Plane and Workers.
 
 
-a. Configueration Files
+A. Configueration Files
 
 Link to yaml file:  https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.yaml
 
@@ -14,12 +20,13 @@ This yaml file requires transpiling to an Igntion config file. Use this online s
 
 I am using this ignition file which was created some time ago: https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.ign
 
-
 I have shortned the github url so I can type it easily on CoreOS using free service: https://y.gy/4Vmj
 
-b. Fedora CoreOS Setup:
+B. Fedora CoreOS Setup:
 
-Setup a VM on Proxmox for CoreOS.  An automated script is in here: ../Scripts/fedora-core-os-vmbuilder.sh
+Setup a VM on Proxmox for CoreOS.  
+      I am suing this automated script: ../Scripts/fedora-core-os-vmbuilder.sh
+
 Boot from the CoreOS LiveCD
    -- Add image of console
 
@@ -29,27 +36,22 @@ curl https://y.gy/4XmZ  -L -o bootstrap.ign
 view bootstrap.ign    // Sanity check the ignition file
 
 lsblk -a
-
 sudo coreos-installer install /dev/sda --ignition-file  bootstrap.ign
-
 sudo init 6
 
-Access newly created CoreOS using ssh
+Access the newly created CoreOS using ssh
    $ ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.xx
 
-
 Let the new server reboot few times.
-
 When the IP number of the new server is visible in Proxmox GUI, it is good to go
 
 
-----------------------------------
-Part 2 Kubernetes Software Installation
+C. Kubernetes Software Installation
 
-Code to perform Kubernetes setup is pushed through bootstrap-kube-software.yaml
-onto the host and saved in /var/tmp
+Scripts to perform Kubernetes setup is pushed using  bootstrap-kube-software.yaml onto the host and
+saved in /var/tmp
 
-Once the host is up and running ssh onto it and run:
+Once the host is up and running ssh onto it.
 cd /var/tmp
 ./1.sh
 ./2.sh
@@ -57,31 +59,30 @@ cd /var/tmp
 Now it is good time either to create a Proxmox template or use this host as the base for other hosts in
 the Kubernetes clsuster and clone this as necessary. Choise is yours.
 
-Part 3 Kubernetes Setup
 
-In this part, we are setting up the Kubernetes Cluster. Clone a new host from the Proxmox Template or the host created in Part 2.
+Part 2 Kubernetes Setup
 
-a. Change IP number and hostname of the server
+In this part, we are setting up the Kubernetes Cluster. Clone a new host from the Proxmox Template or the host created in Part 1C.
+
+A. Change the IP number and hostname of the server
 ssh onto the server
-Instructions for these is in /var/tmp/0.sh
+Instructions for changing these are in /var/tmp/0.sh
 
 vi /etc/hostname                             
 vi /etc/NetworkManager/system-connections/ens18.nmconnection
 init 6
 
-b. Kubernetes configueration
+B. Kubernetes configueration
 
 ssh onto the server
 cd /var/tmp
 ./3.sh
 
 As per the screen output, copy the kube-config
-Exit root shell
+exit root shell
 
 
-
-
-Part 4 Verify status of the Kubernetes cluster
+Part 3 Verify status of the Kubernetes cluster
 
 kubectl cluster-info
 
@@ -104,7 +105,7 @@ b4a40aee2f833    11 minutes ago   Ready          kube-proxy-pj5rs               
 
 
 
-Part 5 - Setup Networking using Flannel 
+Part 4 - Setup Networking using Flannel 
 
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -175,7 +176,13 @@ is working as of 9.Feb.2024
 
 
 References:
+
+0. Kubernets
+https://kubernetes.io/docs/home/
+
 1 .Kubernetes Architectue
 https://spot.io/resources/kubernetes-architecture/11-core-components-explained/
 
 
+2. Building a kubernetes ready Fedora CoreOS image
+From: https://vincentdeborger.be/blog/building-a-kubernetes-ready-fedora-coreos-image/
