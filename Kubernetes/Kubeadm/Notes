@@ -5,15 +5,12 @@ Asuumptions:
 Familarity with Proxmox
 Understanding of Kubnernetes
 
-
 Part 1
-
 The idea is to create Kubernetes ready build image that can be used to deploy the nodes required
 for the Control Plane and Workers.
 
 
 A. Configueration Files
-
 Link to yaml file:  https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Kubernetes/bootstrap-kube-software.yaml
 
 This yaml file requires transpiling to an Igntion config file. Use this online service: https://fcct.techoverflow.net/
@@ -23,7 +20,6 @@ I am using this ignition file which was created some time ago: https://github.co
 I have shortned the github url so I can type it easily on CoreOS using free service: https://y.gy/4Vmj
 
 B. Fedora CoreOS Setup:
-
 Setup a VM on Proxmox for CoreOS.  
       I am suing this automated script: ../Scripts/fedora-core-os-vmbuilder.sh
 
@@ -47,7 +43,6 @@ When the IP number of the new server is visible in Proxmox GUI, it is good to go
 
 
 C. Kubernetes Software Installation
-
 Scripts to perform Kubernetes setup is pushed using  bootstrap-kube-software.yaml onto the host and
 saved in /var/tmp
 
@@ -61,7 +56,6 @@ the Kubernetes clsuster and clone this as necessary. Choise is yours.
 
 
 Part 2 Kubernetes Setup
-
 In this part, we are setting up the Kubernetes Cluster. Clone a new host from the Proxmox Template or the host created in Part 1C.
 
 A. Change the IP number and hostname of the server
@@ -73,7 +67,6 @@ vi /etc/NetworkManager/system-connections/ens18.nmconnection
 init 6
 
 B. Kubernetes configueration
-
 ssh onto the server
 cd /var/tmp
 ./3.sh
@@ -83,12 +76,9 @@ exit root shell
 
 
 Part 3 Verify status of the Kubernetes cluster
-
 kubectl cluster-info
-
 kubectl get po -n kube-system
 kubectl get --raw='/readyz?verbose'
-
 kubectl get pods --all-namespaces
 kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName --all-namespaces
 
@@ -106,7 +96,6 @@ b4a40aee2f833    11 minutes ago   Ready          kube-proxy-pj5rs               
 
 
 Part 4 - Setup Networking using Flannel 
-
 sudo sysctl net.bridge.bridge-nf-call-iptables=1
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
@@ -141,7 +130,6 @@ POD ID        CREATED          STATE          NAME                         NAMES
 Known Issues:
 
 1. Warning about installing qemu agent
-
 ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.50
 Fedora CoreOS 39.20240112.3.0
 Tracker: https://github.com/coreos/fedora-coreos-tracker
@@ -163,7 +151,6 @@ root         933       1  0 03:42 ?        00:00:00 /usr/bin/qemu-ga --method=vi
 Will try to fix this sometime as the functioanlity is not broken.
 
 2. CoreOS/ Calico is broken!
-
 When I started this project my intention was to use Calico as the Kubernetes CNI.
 Calico failed to start and investigation led me to this bug report. Joys of using
 OpenSource software!
@@ -176,7 +163,6 @@ is working as of 9.Feb.2024
 
 
 References:
-
 0. Kubernets
 https://kubernetes.io/docs/home/
 
