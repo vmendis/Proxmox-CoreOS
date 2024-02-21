@@ -4,6 +4,25 @@ Asuumptions:
 o Familarity with Proxmox
 o Understanding of Kubnernetes
 
+Part 0
+Build the Kubernetes management host
+
+Setup a VM on Proxmox for CoreOS.  Will keep setting up of this host to a minimum
+      I am suing this automated script: ../Scripts/fedora-core-os-vmbuilder.sh
+
+ssh onto this host
+change the ip number and hostname
+init 6
+
+Once the new host has completed CoreOS updates,
+ssh onto this host
+Download kubectl
+         curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+chmod a+x kubectl
+sudo mv kubectl /usr/local/bin
+
+
 Part 1
 The idea is to create Kubernetes ready build image that can be used to deploy the nodes required
 for the Control Plane and Workers.

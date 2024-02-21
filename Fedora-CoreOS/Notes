@@ -1,14 +1,12 @@
 WIP Notes. These will be beautified later on
 
 Assumptions:
-
 a. It is expected user is aware of creating virtual machines (VM) in Proxmox.
 b. Usage of secure shell (ssh)
 
 
 
-Configueration Files
-
+1. Configueration Files
 Link to yaml file: 
    https://github.com/vmendis/Proxmox-Fedora-CoreOS/blob/main/Fedora-CoreOS/bootstrap.yaml
 
@@ -22,8 +20,8 @@ I am using this ignition file which was created some time ago:
 I have shortned the github url so I can type it easily on CoreOS using free service:
    curl https://y.gy/4Vmj
 
-Fedora CoreOS Setup:
 
+2. Fedora CoreOS Setup:
 Setup a VM on Proxmox for CoreOS
 Boot from the CoreOS LiveCD
    -- Add image of console
@@ -32,15 +30,18 @@ cd /tmp
 curl https://y.gy/4Vmj -L -o bootstrap.ign
 
 view bootstrap.ign    // Sanity check the ignition file
-
 lsblk -a
-
 sudo coreos-installer install /dev/sda --ignition-file  bootstrap.ign
-
 sudo init 6
 
 Access newly created CoreOS using ssh
    $ ssh -i ~/.ssh/core_os_id_rsa core@192.168.1.50
+
+3. Changing hostname and ip number
+sudo su -
+vi /etc/hostname                             
+vi /etc/NetworkManager/system-connections/ens18.nmconnection
+init 6
 
 
 A very advanced conigueration guide which includes modifying kernal parameters 
